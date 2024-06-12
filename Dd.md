@@ -45,7 +45,7 @@ local entity = Spawner.createEntity({
 ---====== Debug ======---
 
 entity.Debug.OnEntitySpawned = function()
-     wait(10)
+     wait(5)
      game.Workspace:FindFirstChild("Claim"):Destroy()
 end
 
@@ -79,7 +79,7 @@ game.Players.LocalPlayer.Character.Humanoid:TakeDamage(1000)
 end
 
 entity.Debug.OnLookAtEntity = function()
-    game.Players.LocalPlayer.Character.Humanoid:TakeDamage(40)
+    game.Players.LocalPlayer.Character.Humanoid:TakeDamage(20)
 end
 
 entity.Debug.OnDeath = function()

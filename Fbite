@@ -1,0 +1,81 @@
+local Spawner = loadstring(game:HttpGet("https://raw.githubusercontent.com/huyhoangphuc/a120doors/main/jghgifgy"))()
+
+---====== Create entity ======---
+
+local entity = Spawner.createEntity({
+    CustomName = "Frostbite",
+    Model = "rbxassetid:////12797521669", -- Your entity's model url here ("rbxassetid://1234567890" or GitHub raw url)
+    Speed = 99999,
+    MoveDelay = 1,
+    HeightOffset = 40,
+    CanKill = false,
+    KillRange = 100,
+    SpawnInFront = false,
+    ShatterLights = false,
+    FlickerLights = {
+        Enabled = true,
+        Duration = 0
+    },
+    Cycles = {
+        Min = 999,
+        Max = 999,
+        Delay = 0
+    },
+    CamShake = {
+        Enabled = true,
+        Values = {1.5, 20, 0.1, 1},
+        Range = 100
+    },
+    ResistCrucifix = true,
+    BreakCrucifix = true,
+    DeathMessage = {"you die to A-10", "yee."},
+    IsCuriousLight = true
+})
+
+---====== Debug ======---
+
+entity.Debug.OnEntitySpawned = function()
+    print("Entity has spawned")
+end
+
+entity.Debug.OnEntityDespawned = function()
+    print("cool")
+end
+entity.Debug.OnEntityStartMoving = function()
+    print("Entity started moving")
+end
+
+entity.Debug.OnEntityFinishedRebound = function()
+    game.Players.LocalPlayer.Character.Humanoid:TakeDamage(5)
+end
+
+entity.Debug.OnEntityEnteredRoom = function(room)
+    if  game.ReplicatedStorage.GameData.LatestRoom.Value ~= 50 then
+game.ReplicatedStorage.GameData.LatestRoom.Changed:Wait()
+else
+Wait(1)
+end
+
+game.Workspace:FindFirstChild("Frostbite"):Destroy()
+end
+
+entity.Debug.OnLookAtEntity = function()
+    print("Player looking at entity")
+end
+
+entity.Debug.OnDeath = function()
+    print("Player has died")
+end
+
+--[[
+    NOTE: By overwriting 'OnUseCrucifix', the default crucifixion will be ignored and this function will be called instead
+
+    entity.Debug.OnUseCrucifix = function()
+        print("Custom crucifixion script here")
+    end
+]]--
+
+---====== Run entity ======---
+
+Spawner.runEntity(entity)
+end
